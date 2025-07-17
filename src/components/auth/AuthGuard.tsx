@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Loader2 } from 'lucide-react'
 import { supabase } from '@/blink/client'
+import { LoginForm } from './LoginForm'
 import type { User } from '@/types'
 
 interface AuthGuardProps {
@@ -171,27 +172,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
   }
 
   if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="max-w-md w-full mx-4">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span className="text-white font-bold text-2xl">N</span>
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome to NEXY</h1>
-            <p className="text-gray-600 mb-8">
-              Connect with professionals, discover events, and grow your network
-            </p>
-            <button
-              onClick={() => supabase.auth.signInWithOAuth({ provider: 'google' })}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105"
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
-      </div>
-    )
+    return <LoginForm />
   }
 
   return <>{children(user)}</>
